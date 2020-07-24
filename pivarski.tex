@@ -1,0 +1,84 @@
+\documentclass[compress]{beamer}
+\usepackage{ifthen,verbatim,hyperref}
+
+\title{Muon HIP Software Status}
+\author{Jim Pivarski, Alexei Safonov}
+\institute{Texas A\&M University}
+\date{23 July, 2007}
+
+\newcommand{\isnote}{}
+\xdefinecolor{lightyellow}{rgb}{1.,1.,0.25}
+\xdefinecolor{darkblue}{rgb}{0.1,0.1,0.7}
+
+%% %% Uncomment this to get annotations
+%% \def\notes{\addtocounter{page}{-1}
+%%            \renewcommand{\isnote}{*}
+%% 	   \beamertemplateshadingbackground{lightyellow}{white}
+%%            \begin{frame}
+%%            \frametitle{Notes for the previous page (page \insertpagenumber)}
+%%            \itemize}
+%% \def\endnotes{\enditemize
+%% 	      \end{frame}
+%%               \beamertemplateshadingbackground{white}{white}
+%%               \renewcommand{\isnote}{}}
+
+%% Uncomment this to not get annotations
+\def\notes{\comment}
+\def\endnotes{\endcomment}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{\includegraphics[height=1 cm]{../cmslogo} \hspace{0.1 cm} \includegraphics[height=1 cm]{../tamulogo} \hfill
+\begin{minipage}{5.5 cm}
+\vspace{-0.75 cm} \small
+\begin{center}
+\ifthenelse{\equal{\insertpagenumber}{1}}{}{\textcolor{blue}{\insertsection}}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}{4.5 cm}
+\vspace{-0.75 cm} \small
+\begin{flushright}
+\ifthenelse{\equal{\insertpagenumber}{1}}{}{Jim Pivarski \hspace{0.5 cm} \insertpagenumber\isnote/\pageref{numpages}}
+\end{flushright}
+\end{minipage}\mbox{\hspace{0.2 cm}}}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{notes}
+\item This is the annotated version of my talk.
+\item If you want the version that I am presenting, download the one
+labeled ``slides'' on Indico (or just ignore these yellow pages).
+\item The annotated version is provided for extra detail and a written
+record of comments that I intend to make orally.
+\item Yellow notes refer to the content on the {\it previous} page.
+\item All other slides are identical for the two versions.
+\end{notes}
+
+\begin{frame}
+\frametitle{What will be in CMSSW\_1\_6\_X (CSA07)}
+\begin{itemize}\setlength{\itemsep}{0.25 cm}
+\item RecoMuon: muon hits now use alignment parameter errors (useful for deweighting hits)
+\item HIPAlignmentAlgorithm: added option to select hits based on pull (residual / uncertainty)
+\item AlignmentProducer: can now write to the database (bug fix)
+\item CommonAlignmentMonitor: added pull distributions, $Z$ mass/$\chi^2$ per iteration
+\item Python scripts: lookup ``hardware IDs'' $\leftrightarrow$ raw DetIds in both directions, everything now works as promised including 3-D viewer, twiki has a recipe for running on and off of lxplus
+\end{itemize}
+Of course, we are not limited to 1\_6\_X in our studies.
+\end{frame}
+
+\begin{frame}
+\frametitle{Available data/Monte Carlo samples (see hyperlinks)}
+\begin{itemize}\setlength{\itemsep}{0.25 cm}
+\item \textcolor{blue}{\underline{\href{http://cmsdbs.cern.ch/DBS2_discovery/getData?ajax=0&userMode=user&dbsInst=cms_dbs_prod_global&group=Any&tier=Any&site=Any&app=CMSSW_1_5_2&primType=Any&primD=Any}{1\_5\_2 validation samples}}}: 5100 $Z\to\mu\mu$
+\item 100,000 $Z\to\mu\mu$ events requested in 1\_5\_3 (this month?)
+\item Millions of mixed events in CSA07 (September)
+\item \textcolor{blue}{\underline{\href{https://twiki.cern.ch/twiki/bin/view/CMS/TkAlignmentMC}{Spring 07 samples}}}: won't work for us because they're in 1\_3\_1, but if the new samples are not forthcoming, I'll create a back-port of the relevant software
+\item Beam-halo Monte Carlo: needs to be reconstructed
+\item Cosmic ray Monte Carlo?  (for comparison with MTCC)
+\item \textcolor{blue}{\underline{\href{https://twiki.cern.ch/twiki/bin/view/CMS/ReconMTCC2006}{MTCC}}}: recipes available for reconstruction, full-scale production will begin soon
+\item Slice test?  GREM?
+\end{itemize}
+\label{numpages}
+\end{frame}
+
+\end{document}
